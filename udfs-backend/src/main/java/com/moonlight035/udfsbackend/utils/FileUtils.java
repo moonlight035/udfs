@@ -1,5 +1,7 @@
 package com.moonlight035.udfsbackend.utils;
 
+import com.moonlight035.udfsbackend.constants.FileTypeEnum;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FileUtils {
@@ -45,5 +47,17 @@ public class FileUtils {
             prefix.append(BASE);
         }
         return prefix + val;
+    }
+
+    public static FileTypeEnum getFileType(String suffix){
+
+        for (FileTypeEnum e : FileTypeEnum.values()) {
+            if(e==FileTypeEnum.OTHER)
+                return e;
+            for(String suf : e.getSuffixs())
+                if(suf.equals(suffix))
+                    return e;
+        }
+        return null;
     }
 }

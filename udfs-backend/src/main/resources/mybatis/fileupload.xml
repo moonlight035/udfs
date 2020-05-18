@@ -1,10 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace用于绑定Dao接口 -->
-<mapper namespace="com.moonlight035.udfsbackend">
+<mapper namespace="com.moonlight035.udfsbackend.dao.FileUploadDao">
 
-    <!-- 查询名字记录sql -->
-    <select id="insert" parameterType="String" resultMap="BaseResultMap">
-        SELECT * FROM girls_info WHERE user_name = #{userName}
+    <insert id="insert" parameterType="com.moonlight035.udfsbackend.model.FileUploadModel">
+        insert into
+        t_user_file(
+        video_no,
+        save_name,
+        `name`,
+        suffix,
+        url,
+        `type`,
+        `partition`,
+        create_account,
+        create_time,
+        modify_account,
+        modify_time,
+        remark
+        )
+        values(
+        #{videoNo},
+        #{saveName},
+        #{name},
+        #{suffix},
+        #{url},
+        #{type},
+        #{partition},
+        #{createAccount},
+        #{createTime},
+        #{modifyAccount},
+        #{modifyTime},
+        #{remark}
+        )
+    </insert>
+
+    <select id="select" parameterType="com.moonlight035.udfsbackend.model.FileUploadQuery"
+        resultType="com.moonlight035.udfsbackend.model.FileUploadModel">
+        select
+        id,
+        video_no as videoNo,
+        save_name as saveName,
+        name,
+        suffix,
+        url,
+        type,
+        `partition`,
+        create_account as createAccount,
+        create_time as createTime,
+        modify_account as modifyAccount,
+        modify_time as modifyTime,
+        remark
+        from t_user_file
+        <where>
+            1=1
+            <if test="partition!=null">
+                and `partition`=#{partition}
+            </if>
+            <if test="type!=null">
+                and `type`=#{type}
+            </if>
+            <if test="name!=null and name!=''">
+                and `name`=#{name}
+            </if>
+        </where>
+        order by create_time desc
+        limit #{pageStart},#{pageSize}
+    </select>
+
+    <select id="selectCount" parameterType="com.moonlight035.udfsbackend.model.FileUploadQuery"
+            resultType="java.lang.Integer">
+        select
+        count(*)
+        from t_user_file
+        <where>
+            1=1
+            <if test="partition!=null">
+                and `partition`=#{partition}
+            </if>
+            <if test="type!=null">
+                and `type`=#{type}
+            </if>
+            <if test="name!=null and name!=''">
+                and `name`=#{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOne" parameterType="com.moonlight035.udfsbackend.model.FileUploadQuery"
+            resultType="com.moonlight035.udfsbackend.model.FileUploadModel">
+        select
+        id,
+        video_no as videoNo,
+        save_name as saveName,
+        name,
+        suffix,
+        url,
+        type,
+        `partition`,
+        create_account as createAccount,
+        create_time as createTime,
+        modify_account as modifyAccount,
+        modify_time as modifyTime,
+        remark
+        from t_user_file
+        <where>
+            1=1
+            <if test="id!=null">
+                and `id`=#{id}
+            </if>
+            <if test="saveName!=null">
+                and `save_name`=#{saveName}
+            </if>
+        </where>
     </select>
 </mapper>

@@ -3,6 +3,8 @@ package com.moonlight035.udfsbackend.model;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -12,4 +14,5 @@ public class BaseModel implements Serializable {
     private String modifyAccount;
     private Date modifyTime;
     private String remark;
+
 }

@@ -2,8 +2,10 @@ package com.moonlight035.udfsbackend.utils;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Result {
+public class Result implements Serializable {
     private int status;
     private Object data;
     private String error;

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const request=(url,type='get',isJson='false',param)=>{
+export const request=(url,param,type='get',isJson='false')=>{
   const query = {
     url:url,
     method:type,
